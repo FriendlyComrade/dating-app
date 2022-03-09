@@ -24,7 +24,7 @@
       position: absolute;
       width: 30;
       height: 26px;
-      z-index: 5;
+      z-index: 2;
     }
     img.heart-image:nth-child(1){
       top: 221px;
@@ -69,7 +69,6 @@
     img.heart-image:nth-child(11){
       bottom: 114.5px;
       left: 862px;
-      background: black;
     }
     img.heart-image:nth-child(12){
       bottom: 157.5px;
