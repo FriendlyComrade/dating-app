@@ -1,5 +1,5 @@
 <template>
-  <div class="fn">
+  <div class="skeleton">
 
   </div>
 </template>
@@ -11,7 +11,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .fn {
+  .skeleton {
     width: 100vw;
     height: 100vh;
     background-color: black;
