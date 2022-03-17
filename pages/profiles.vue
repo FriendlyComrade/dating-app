@@ -1,13 +1,15 @@
 <template>
   <Suspense>
     <div class="profiles-page">
-      <strong>Анкеты</strong>
-        <div class="profiles-page__data-list">
-                <ProfileCard v-for="(profile, i ) in profiles" :key="i" :profile="profile"/>
-        </div>
-      <img class="hearts-img-top" src="@/assets/hearts.png" alt="herts-png"/>
-      <img class="hearts-img-middle" src="@/assets/hearts.png" alt="herts-png"/>
-      <img class="hearts-img-bottom" src="@/assets/hearts.png" alt="herts-png"/>
+      <div class="profiles-page__wrapper">
+        <strong>Анкеты</strong>
+          <div class="profiles-page__data-list">
+            <ProfileCard v-for="(profile, i ) in profiles" :key="i" :profile="profile"/>
+          </div>
+        <img class="hearts-img-top" src="@/assets/hearts.png" alt="herts-png"/>
+        <img class="hearts-img-middle" src="@/assets/hearts.png" alt="herts-png"/>
+        <img class="hearts-img-bottom" src="@/assets/hearts.png" alt="herts-png"/>
+      </div>
     </div>
     <template #fallback>
       <ProfileSkeleton/>
@@ -16,7 +18,6 @@
 </template>
 
 <script>
-
   export default {
     mounted() {
       localStorage.currentPath = this.$route.path
@@ -35,12 +36,18 @@
 <style lang="scss" scoped>
   $main-color: #E3B5A4;
   .profiles-page {
-    position: relative;
     background-color: $main-color;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    &__wrapper {
+      position: relative;
+      width: 1384px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     img {
       position: absolute;
       width: 364px;
@@ -49,16 +56,17 @@
     }
     .hearts-img-top {
       top: 127px;
-      left: 63px;
-    }
-    .hearts-img-bottom {
-      bottom: 435px;
-      left: 30px;
+      left: 35px;
     }
     .hearts-img-middle {
       top:993px;
-      right: 28px;
+      right: 0;
     }
+    .hearts-img-bottom {
+      bottom: 435px;
+      left: 2px;
+    }
+
     strong {
       font-family: 'Comfortaa', cursive;
       font-size: 48px;

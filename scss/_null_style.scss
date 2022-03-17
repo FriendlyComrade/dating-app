@@ -1,22 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Roboto:wght@300&display=swap');
 
-@import '@/scss/_mixins.scss';
-
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+*, ::before, ::after {
+	-webkit-box-sizing: border-box !important;
+	-moz-box-sizing: border-box !important;
+	-ms-box-sizing: border-box !important;
+	box-sizing: border-box !important;
 }
 
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
-  line-height: 1.5;
 }
 
 input,
@@ -27,6 +26,7 @@ select {
 }
 
 button {
+  width: 500px;
   padding: 0;
   border: none;
   font: inherit;
@@ -42,3 +42,6 @@ ol[class] {
   list-style: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}

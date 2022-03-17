@@ -13,7 +13,7 @@ export const getters = {
   getUserAge: (state) => state.userAge,
   getUserActiveRangeRadioBtn: (state) => state.activeRangeRadioBtn,
   getGirlsProfiles: (state) => state.girlsProfiles,
-  getQuestionModal: (state) => state.questionModal
+  getQuestionModal: (state) => state.questionModal,
 }
 
 export const actions = {
@@ -21,14 +21,16 @@ export const actions = {
     let response = await fetch( 'https://dev.rusdat.net/api/test/crm/send_lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(value)
+      body: JSON.stringify(value),
   })
-    return response.status
+    console.log(response.json())
+    return response.json()
   },
   FETCH_PROFILES: async ({commit}) => {
     const result = await fetch('https://dev.rusdat.net/api/test/profiles')
     .then(res => res.json())
     commit('setGirlsProfiles', result.data)
+    console.log(result.data)
     return result.data;
   }
 }

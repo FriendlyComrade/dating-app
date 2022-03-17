@@ -72,7 +72,7 @@
     &__mail-block {
       display: flex;
       align-items: center;
-      // margin-top:7px;
+      margin-top:7px;
       img.profile-card__mail-img {
         width: 21px;
         height: 15px;
@@ -80,12 +80,13 @@
         border-radius: 0;
       }
       a {
+        color: black;
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
       }
     }
     &__about-block {
-      height: 100px;
+      height: 90px;
       overflow: hidden;
       margin-right: 29px;
       margin-top: 25px;
@@ -100,6 +101,7 @@
     //   background-color: #773344;
     // }
     &__about-text {
+      line-height: 22px;
       font-family: 'Roboto', sans-serif;
       font-size: 16px;
     }

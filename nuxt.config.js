@@ -15,7 +15,6 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/scss/_null_style.scss'
@@ -30,8 +29,16 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify', '@nuxtjs/style-resources', '@nuxtjs/composition-api/module'
   ],
+
+  styleResources: {
+    scss: [
+      '@/scss/_media_mixin.scss', '@/scss/_mixins.scss',
+    ]
+  },
+
+
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

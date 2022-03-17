@@ -28,7 +28,7 @@
     </p>
     <div class="started-page__modal-btn-block">
       <button @click="nextQuestionModal" class="yes-btn" type="button">ДА</button>
-      <button class="not-btn" type="button">НЕТ</button>
+      <button @click="previousQuestionModal" class="not-btn" type="button">НЕТ</button>
     </div>
     <BeatingHearts/>
   </div>
@@ -40,7 +40,7 @@
     </p>
     <div class="started-page__modal-btn-block">
       <button @click="nextQuestionModal" class="yes-btn" type="button">ДА</button>
-      <button class="not-btn" type="button">НЕТ</button>
+      <button @click="previousQuestionModal" class="not-btn" type="button">НЕТ</button>
     </div>
     <BeatingHearts/>
   </div>
@@ -52,13 +52,12 @@
     </p>
     <div class="started-page__modal-btn-block">
       <button @click="nextQuestionModal" class="yes-btn" type="button">ДА</button>
-      <button class="not-btn" type="button">НЕТ</button>
+      <button @click="previousQuestionModal" class="not-btn" type="button">НЕТ</button>
     </div>
     <BeatingHearts/>
   </div>
 
   <div class="started-page__modal-content"  v-if="questionModal === 5">
-
     <strong>Поздравляем!</strong>
     <span class="started-page__сongratulations-modal-span"> Вы имеете право на наш сайт! </span>
       <p class="started-page__сongratulations-modal-text">
@@ -79,13 +78,13 @@
       <span class="started-page__сongratulations-modal-span">
         Вы согласны с этим?
       </span>
-        <button @click="nextQuestionModal" class="yes-btn" type="button">Я СОГЛАСЕН</button>
+        <button @click="nextQuestionModal" class="continue" type="button">Я СОГЛАСЕН</button>
         <BeatingHearts/>
   </div>
 
   <div class="started-page__modal-content"  v-if="questionModal === 6">
     <Form/>
-    <BeatingHearts style="right: -10px;"/>
+
   </div>
 </div>
 </template>
@@ -96,13 +95,16 @@
       if (localStorage.questionModal) { this.questionModal = localStorage.questionModal}
     },
     watch: {
-      questionModal() {
-        localStorage.questionModal = this.questionModal
+      questionModal(num) {
+        localStorage.questionModal = num
       }
     },
     methods: {
       nextQuestionModal() {
         this.$store.commit('setQuestionModal', this.questionModal + 1)
+      },
+      previousQuestionModal() {
+        this.$store.commit('setQuestionModal', this.questionModal - 1)
       }
     },
     computed: {
@@ -116,8 +118,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/scss/_media_mixin.scss';
-  @import '@/scss/_mixins.scss';
 .started-page__modal-block {
   z-index: 2;
   position: absolute;
@@ -130,29 +130,50 @@
   justify-content: center;
   align-content: center;
   align-items: center;
-  @include _350{
-    width: rem(295);
-    height: rem(345);
+  @include _1440 {
+    width: vmax(590);
+  }
+  @include _600 {
+    width: vmax(800);
+  }
+  @include _480 {
+      width: vmax(600);
+    }
+  @include _320{
+    width: 288px;
     border: 5px solid #773344;
   }
-
   .started-page__modal-content {
     user-select: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 80px 0;
-    @include _350{
-      width: rem(288);
-      padding: 0;
+    padding: 73px 0;
+    @include _1440 {
+      padding: vmax(73) 0;
     }
-
+    @include _1024 {
+      padding: 40px 0;
+    }
+    @include _320{
+      padding: 36px 0;
+    }
     strong, h1, span { font-family: 'Comfortaa', cursive; }
     strong, h1 {
       font-size: 36px;
-      @include _350{
+      line-height: 40px;
+      @include _1440 {
+        font-size: vmax(36);
+        line-height: vmax(40);
+      }
+      @include _600 {
+        font-size: 28px;
+        line-height: 27px;
+      }
+      @include _320 {
         font-size: 24px;
+        line-height: 27px;
       }
     }
     p {
@@ -161,56 +182,165 @@
       line-height: 22px;
       font-family: 'Roboto', sans-serif;
       font-size: 16px;
-      @include _350 {
+      @include _1440 {
+
+      }
+      @include _1280 {
+        line-height: 20px;
+      }
+      @include _320 {
         font-size: 14px;
         line-height: 16px;
       }
     }
     p:nth-child(2) {
       margin-top: 35px;
+      @include _1440 {
+        margin-top: vmax(35);
+      }
     }
     p:nth-child(3){
       padding: 0 117px;
+      @include _1024 {
+        padding: 0 70px;
+      }
+      @include _320 {
+        padding: 0 8px;
+      }
     }
     p:nth-child(7){
       padding: 0 64px;
+      @include _1440 {
+        padding: 0 vmax(64);
+      }
+      @include _1024 {
+        padding: 0 20px;
+      }
+      @include _320 {
+        padding: 0 20px
+      }
     }
     p:nth-child(9){
       font-weight: 400;
       font-size: 16px;
       font-family: 'Roboto', sans-serif;
-      margin-top: 0;
+      margin: 0;
       padding: 0;
+      line-height: 20px;
+      @include _1440 {
+        line-height: vmax(20);
+      }
+      @include _1024 {
+        padding: 0 vmax(34);
+        margin-bottom: 10px;
+      }
+      @include _600  {
+        line-height: 18px;
 
+      }
+      @include _320 {
+        padding: 0 24px;
+        font-size: 14px;
+        line-height: 16px;
+        margin:0 ;
+      }
     }
     p.started-page__сongratulations-modal-text {
+      line-height: 22px;
       margin-top: 0;
       margin-bottom: 10px;
-      padding: 0 115px;
+      @include _1440 {
+        line-height: vmax(22);
+        margin-bottom: 10px;
+      }
+      @include _600 {
+        line-height: 18px;
+      }
+      @include _480 {
+        padding: 3px;
+      }
+      @include _320 {
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom: 8px;
+      }
+    }
+    p.started-page__сongratulations-modal-text:nth-child(5) {
+      padding: 0 114px;
+      @include _1440 {
+
+      }
+      @include _1024 {
+        padding: 0 40px;
+      }
+      @include _320 {
+        padding: 0 20px;
+      }
+    }
+    p.started-page__сongratulations-modal-text:nth-child(6) {
+
+      padding: 0 64px;
+      @include _1440 {
+        padding: 0 vmax(64)
+      }
     }
     p.started-page__modal-text-1 {
       padding: 0 80px;
-      @include _350 {
-        padding: 0 11px;
-        margin-top: 16px;
+      @include _1440 {
+        padding: 0 vmax(80)
+      }
+      @include _480 {
+        padding: 0 10px;
+      }
+      @include _320 {
+        padding: 0 25px;
+        margin: 16px 0;
       }
     }
     p.started-page__modal-text-2 {
       padding: 0 100px;
+      @include _1440 { padding: 0 vmax(100) }
+      @include _320 {
+        padding: 0 24px;
+      }
     }
     p.started-page__modal-text-3 {
       padding: 0 50px;
+      @include _1440 { padding: 0 vmax(50) }
+      @include _320 { padding: 0 50px }
     }
     p.started-page__modal-text-4 {
       padding: 0 110px;
+      @include _1440 { padding: 0 vmax(110) }
+      @include _480 {
+        padding: 0 10px;
+      }
+      @include _320 { padding: 0 16px }
     }
     p.started-page__modal-text-5 {
       padding: 0 100px;
+      @include _1440 { padding: 0 vmax(100) }
+    @include _480 {
+        padding: 0 15px;
+      }
+      @include _320 { padding: 0 40px;}
+    }
+    p.started-page__modal-text-2, p.started-page__modal-text-3,
+    p.started-page__modal-text-4,  p.started-page__modal-text-5{
+        margin-top: 16px;
+        margin-bottom: 0;
     }
     p#we-dont {
       padding: 0 64px;
       margin-top: 20px;
-      @include _350 {
+      line-height: 16px;
+      @include _1440 {
+        padding: 0 vmax(64);
+        margin-top: vmax(20);
+      }
+      @include _320 {
+        font-size: 12px;
+        line-height: 14px;
         margin-top: 12px;
         padding: 0 15px;
       }
@@ -219,17 +349,43 @@
       margin-top: 25px;
       font-size: 18px;
       font-weight: bold;
-      @include _350 {
+      line-height: 20px;
+
+      @include _1440 {
+        margin-top: vmax(25);
+      }
+      @include _320 {
         font-size: 16px;
-        margin-top: 16px;
+        line-height: 18px;
+        margin-top: 0;
+
       }
     }
     span.started-page__сongratulations-modal-span {
       margin-top: 35px;
+      @include _1440 { margin-top: vmax(35); }
+      @include _320 {
+        font-size: 14px;
+        line-height: 16px;
+        margin-top: 16px;
+        text-align: center;
+      }
 
     }
     span.started-page__сongratulations-modal-span:nth-child(2) {
       margin-bottom: 25px;
+      text-align: center;
+      @include _1440 { margin-bottom: vmax(25); }
+      @include _320 {
+        font-size: 14px;
+        line-height: 16px;
+        margin: 16px 0;
+      }
+    }
+    span.started-page__сongratulations-modal-span:not(:nth-child(2)) {
+      @include _1024 { margin-top: 0; }
+      @include _320 { margin-top: 16px; }
+
     }
     hr {
       margin-bottom: 10px;
@@ -239,6 +395,30 @@
       height: 1px;
       width: 70px;
       display: block;
+      @include _1440 {
+        margin-bottom: vmax(10);
+      }
+      @include _320 {
+        margin-bottom: 8px;
+      }
+    }
+    button {
+      line-height: 18px;
+      margin-top: 35px;
+      font-family: 'Comfortaa', cursive;
+      font-size: 18px;
+      box-shadow: 0px 4px 15px 4px rgba(0, 0, 0, 0.15);
+      border-radius: 6px;
+      padding: 18px 0;
+      @include _1440 {
+        margin-top: vmax(35);
+        padding: 13px 0;
+      }
+      @include _320 {
+        margin-top: 16px;
+        font-size: 14px;
+        line-height: 16px;
+      }
     }
     button.yes-btn, button.continue {
       background: #773344;
@@ -246,29 +426,47 @@
     }
     button.continue {
         width: 224px;
-        height: 54px;
-        @include _350 {
-          width: 256px;
-          height: 44px;
+        @include _1440 {
+          width: vmax(224);
         }
-    }
-    button {
-      margin-top: 35px;
-      font-family: 'Comfortaa', cursive;
-      font-size: 18px;
-      box-shadow: 0px 4px 15px 4px rgba(0, 0, 0, 0.15);
-      border-radius: 6px;
-      @include _350 {
-        margin-top: 16px;
-      }
+        @include _979 {
+          width: vmax(400);
+        }
+        @include _600 {
+          width: vmax(600);
+        }
+        @include _480 {
+          width: vmax(450);
+        }
+        @include _320 {
+          width: 256px;
+        }
+
     }
     .yes-btn, button.not-btn {
       width: 183px;
-      height: 54px;
+      @include _1440 {
+        width: vmax(183);
+      }
+      @include _600 {
+        width: vmax(300);
+      }
+      @include _480 {
+        width: vmax(200);
+      }
+      @include _320 {
+        width: 100px;
+      }
     }
     button.not-btn {
       border: 1px solid #773344;
       margin-left: 20px;
+      @include _1440 {
+        margin-left: vmax(20);
+      }
+      @include _320 {
+        margin-left: 12px;
+      }
     }
   }
 }
