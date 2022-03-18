@@ -16,13 +16,11 @@
         <p class="profile-card__about-text">{{profile.about}}</p>
       </div>
       <a href="mailto:profile@mail.ru"><button type="button">НАПИСАТЬ</button></a>
-
     </div>
   </div>
 </template>
 
 <script>
-
   export default {
     props: {
       profile: {

@@ -37,7 +37,7 @@
   export default {
     data() {
       return {
-        userDeviceWidth: 0
+        userDeviceWidth: 0,
       }
     },
     mounted() {
@@ -48,6 +48,10 @@
 
 <style lang="scss" scoped>
   $main-color: #E3B5A4;
+      .started-page__img-skeleton {
+        width: 300px !important;
+        height: 300px !important;
+      }
     .started-page {
     position: relative;
     display: flex;
